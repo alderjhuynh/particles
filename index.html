@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>i hate particle rings</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="wrap">
+
+  <div class="layout">
+
+    <div class="panel controls">
+
+      <div class="field">
+        <label>Coordinate system</label>
+        <div class="seg" id="coordSeg">
+          <button data-val="caret" class="active">Relative</button>
+          <button data-val="tilde">Absolute</button>
+        </div>
+        <div class="hint" id="coordHint">Rotates with whatever runs the function.</div>
+      </div>
+
+      <div class="field">
+        <label>Orientation</label>
+        <div class="seg" id="orientationSeg">
+          <button data-val="vertical" class="active">Vertical</button>
+          <button data-val="horizontal">Horizontal</button>
+        </div>
+      </div>
+
+      <div class="field" id="facingField" style="display:none;">
+        <label>Facing angle <span class="val" id="facingVal">0°</span></label>
+        <input type="range" id="facing" min="0" max="359" step="1" value="0">
+        <div class="hint">World-locked direction the ring plane faces — 0° = south, 90° = west, 180° = north, 270° = east. Doesn't depend on who runs the function.</div>
+      </div>
+
+      <div class="field">
+        <label>Particle type</label>
+        <input type="text" id="particleType" value="cloud" spellcheck="false">
+      </div>
+
+      <div class="field">
+        <label>Segments<span class="val" id="segmentsVal">36</span></label>
+        <input type="range" id="segments" min="6" max="96" step="1" value="36">
+      </div>
+
+      <div class="field">
+        <label>Starting radius <span class="val" id="radiusVal">0.10 blocks</span></label>
+        <input type="range" id="radius" min="0.05" max="3" step="0.05" value="0.1">
+      </div>
+
+      <div class="field">
+        <label id="offsetLabel">Forward offset <span class="val" id="offsetVal">0.00 blocks</span></label>
+        <input type="range" id="offset" min="-3" max="3" step="0.05" value="0">
+      </div>
+
+      <div class="field">
+        <label>Velocity <span class="val" id="speedVal">0.35 blocks/tick</span></label>
+        <input type="range" id="speed" min="0.02" max="1.2" step="0.01" value="0.35">
+        <div class="presets">
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="field">
+        <label>Spawn mode</label>
+        <select id="mode">
+          <option value="force">force</option>
+          <option value="normal">normal</option>
+        </select>
+      </div>
+
+    </div>
+
+    <div class="right-col">
+
+      <div class="panel preview-panel">
+        <canvas id="preview" width="600" height="600"></canvas>
+        <div class="preview-caption">
+          <span id="viewLabel">Front view — ring faces whoever runs the function</span>
+          <span><b id="ptCount">36</b> particles</span>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="output-head">
+          <h2>Generated .mcfunction</h2>
+          <div class="output-actions">
+            <button class="btn" id="copyBtn">Copy</button>
+            <button class="btn primary" id="downloadBtn">Download</button>
+          </div>
+        </div>
+        <textarea id="output" readonly spellcheck="false"></textarea>
+        <div class="filename-row">
+          <span>File name</span>
+          <input type="text" id="filename" value="ring" style="max-width: 220px;">
+          <span>.mcfunction</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast">Copied to clipboard</div>
+
+<script src="script.js"></script>
+</body>
+</html>
